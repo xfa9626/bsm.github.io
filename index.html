@@ -7,26 +7,47 @@
 <body>
 
 <label>
-    Input A:
-    <input type="number" id="inputA" value="0">
+    Effective Electric Field:
+    <input type="number" id="In_Eeff_GV_cm" value="78">
+     GV/cm
 </label>
 <br>
 
 <label>
-    Input B:
-    <input type="number" id="inputB" value="0">
+    Spin Precession Time:
+    <input type="number" id="in_tau_s" value="0.005">
+     s
+</label>
+<br>
+
+<label>
+    Counting Rate:
+    <input type="number" id="in_count_Rate" value="3e8">
+     /s
+</label>
+    
+<br>
+
+<label>
+    Data Acquisition Length:
+    <input type="number" id="in_DAQ" value="1">
+     day
 </label>
 <br><br>
 
 <button onclick="compute()">Compute</button>
 
-<p>Output: <span id="output">0</span></p>
+<p>d_e = <span id="out_de">0</span></p> e*cm
 
 <script>
 function compute() {
-    const A = Number(document.getElementById('inputA').value);
-    const B = Number(document.getElementById('inputB').value);
-    document.getElementById('output').textContent = A + 2 * B;
+    const Eeff = Number(document.getElementById('In_Eeff_GV_cm').value)*1e9*1e2;
+    const tau = Number(document.getElementById('in_tau_s').value);
+    const Ndot = Number(document.getElementById('in_count_Rate').value);
+    const TDAQ = Number(document.getElementById('in_DAQ').value)*24*3600;
+    const hbar = 1.054e-34;
+    const eCharge = 1.602e-19;    
+    document.getElementById('out_de').textContent = hbar/2/Eeff/tau/(Ndot*TDAQ)^0.5/eCharge*1e2;
 }
 </script>
 
