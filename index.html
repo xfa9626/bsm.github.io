@@ -2,62 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BSM Sensitivity Calculator</title>
+    <title>Electron EDM Limit Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        h1 {
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .form-row label {
+            width: 200px;
+            font-weight: bold;
+        }
+        .form-row input {
+            width: 100px;
+            margin-right: 5px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 5px 15px;
+            font-size: 1em;
+        }
+        p {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
-    
 
-    <h1 style="font-size:2em; font-weight:bold;">Electron EDM</h1>
-    
-<label>
-    effective electric eield:
-    <input type="number" id="In_Eeff_GV_cm" value="78">
-     GV/cm
-</label>
-<br>
+    <h1>Electron EDM Limit Calculator</h1>
 
-<label>
-    spin precession time:
-    <input type="number" id="in_tau_s" value="0.005">
-     s
-</label>
-<br>
+    <div class="form-row">
+        <label for="In_Eeff_GV_cm">Effective electric field:</label>
+        <input type="number" id="In_Eeff_GV_cm" value="78"> GV/cm
+    </div>
 
-<label>
-    count rate:
-    <input type="number" id="in_count_Rate" value="3e8">
-     /s
-</label>
-    
-<br>
+    <div class="form-row">
+        <label for="in_tau_s">Spin precession time:</label>
+        <input type="number" id="in_tau_s" value="0.005"> s
+    </div>
 
-<label>
-    data acquisition:
-    <input type="number" id="in_DAQ" value="1">
-     day
-</label>
-<br><br>
+    <div class="form-row">
+        <label for="in_count_Rate">Count rate:</label>
+        <input type="number" id="in_count_Rate" value="3e8"> /s
+    </div>
 
-<button onclick="compute()">Compute</button>
+    <div class="form-row">
+        <label for="in_DAQ">Data acquisition:</label>
+        <input type="number" id="in_DAQ" value="1"> day
+    </div>
 
-<p>&delta;d<sub>e</sub> = <span id="out_de">0</span> e*cm</p> 
+    <button onclick="compute()">Compute</button>
 
-<script>
-function compute() {
-    const Eeff = Number(document.getElementById('In_Eeff_GV_cm').value)*1e9*1e2;
-    const tau = Number(document.getElementById('in_tau_s').value);
-    const Ndot = Number(document.getElementById('in_count_Rate').value);
-    const TDAQ = Number(document.getElementById('in_DAQ').value)*24*3600;
-    const hbar = 1.054e-34;
-    const eCharge = 1.602e-19;    
- const de =
-    hbar / 2 /
-    (Eeff * tau * Math.sqrt(Ndot * TDAQ)) /
-    eCharge * 1e2;
+    <p>&delta;d<sub>e</sub> = <span id="out_de">0</span> e·cm</p> 
 
-document.getElementById('out_de').textContent = de.toExponential(2);
-}
-</script>
+    <script>
+    function compute() {
+        const Eeff = Number(document.getElementById('In_Eeff_GV_cm').value) * 1e9 * 1e2;
+        const tau = Number(document.getElementById('in_tau_s').value);
+        const Ndot = Number(document.getElementById('in_count_Rate').value);
+        const TDAQ = Number(document.getElementById('in_DAQ').value) * 24 * 3600;
+        const hbar = 1.054e-34;
+        const eCharge = 1.602e-19;
+
+        const de = (hbar / 2) / (Eeff * tau * Math.sqrt(Ndot * TDAQ)) / eCharge * 1e2;
+
+        document.getElementById('out_de').textContent = de.toExponential(2);
+    }
+    </script>
 
 </body>
 </html>
