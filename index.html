@@ -86,7 +86,7 @@ h1 {
     </div>
     <div class="form-row">
       <label>Spin precession time:</label>
-      <input type="number" value="0.005" id="tau_Beam" oninput="compute_Beam()"> s
+      <input type="number" value="0.005" id="tau_Beam" step="0.001" oninput="compute_Beam()"> s
     </div>
     <div class="form-row">
       <label>Count rate:</label>
@@ -112,7 +112,7 @@ h1 {
     </div>
     <div class="form-row">
       <label>Spin precession time:</label>
-      <input type="number" value="2" id="tau_Trap" oninput="compute_Trap()"> s
+      <input type="number" value="2.0" id="tau_Trap"  step="0.1" oninput="compute_Trap()"> s
     </div>
     <div class="form-row">
       <label>N per shot:</label>
@@ -137,7 +137,7 @@ h1 {
     </div>
     <div class="form-row">
       <label>Spin precession time:</label>
-      <input type="number" value="20" id="tau_Trap_Multi" oninput="compute_Trap_Multi()"> s
+      <input type="number" value="20.0" id="tau_Trap_Multi"  step="0.1"  oninput="compute_Trap_Multi()"> s
     </div>
     <div class="form-row">
       <label>N per shot:</label>
