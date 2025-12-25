@@ -112,7 +112,7 @@ h1 {
     </div>
     <div class="form-row">
       <label>Data acquisition:</label>
-      <input type="number" value="1" id="DAQ_Trap> day
+      <input type="number" value="1" id="DAQ_Trap"> day
     </div>
       <button onclick="compute_Trap()">Compute</button>
     <p>&delta;d<sub>e</sub> = <span id="out_de_Trap">0</span> e·cm</p>
@@ -133,7 +133,7 @@ h1 {
     </div>
     <div class="form-row">
       <label>N per shot:</label>
-      <input type="number" value="3e8" id="Ndot_Trap_Multi">
+      <input type="number" value="3e8" id="Nshot_Trap_Multi">
     </div>
     <div class="form-row">
       <label>rep rate:</label>
@@ -141,7 +141,7 @@ h1 {
     </div>
     <div class="form-row">
       <label>Data acquisition:</label>
-      <input type="number" value="1" id="DAQ_Trap_Multi> day
+      <input type="number" value="1" id="DAQ_Trap_Multi"> day
     </div>
     
           <button onclick="compute_Trap_Multi()">Compute</button>
@@ -192,7 +192,7 @@ function compute_Trap_Multi() {
     const eCharge = 1.602e-19;
 
     const de = (hbar / 2) / (Eeff * tau * Math.sqrt(Frep *Nshot * TDAQ)) / eCharge * 1e2;
-    document.getElementById('out_de_Trap').textContent = de.toExponential(2);
+    document.getElementById('out_de_Multi').textContent = de.toExponential(2);
 }
 </script>
 
