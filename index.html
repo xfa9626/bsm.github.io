@@ -1,57 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Electron EDM Limit Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 30px;
-        }
-        h1 {
-            font-size: 2em;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .form-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .form-row label {
-            width: 200px;
-            font-weight: bold;
-        }
-        .form-row input {
-            width: 100px;
-            margin-right: 5px;
-        }
-        button {
-            margin-top: 15px;
-            padding: 5px 15px;
-            font-size: 1em;
-        }
-        p {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Electron EDM Limit Calculator</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* side-by-side container */
+.panel-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* each column */
+.panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.panel img {
+    margin-bottom: 10px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-row label {
+    width: 200px;
+    font-weight: bold;
+}
+
+.form-row input {
+    width: 100px;
+    margin-right: 5px;
+}
+</style>
 </head>
+
 <body>
 
-    <h1>Electron EDM Limit Calculator</h1>
+<h1>Electron EDM Limit Calculator</h1>
 
 <div class="panel-container">
 
   <div class="panel">
-      <label>beam style:</label>
-
-
-  <div class="panel">
     <img src="eEDM_Beam.png" width="300">
-
     <div class="form-row">
       <label>Effective electric field:</label>
       <input type="number" value="78"> GV/cm
@@ -69,7 +78,6 @@
       <input type="number" value="1"> day
     </div>
   </div>
-
 
   <div class="panel">
     <img src="eEDM_Beam.png" width="300">
@@ -90,7 +98,6 @@
       <input type="number" value="1"> day
     </div>
   </div>
-
 
   <div class="panel">
     <img src="eEDM_Beam.png" width="300">
@@ -113,22 +120,6 @@
   </div>
 
 </div>
-
-
-    <script>
-    function compute() {
-        const Eeff = Number(document.getElementById('In_Eeff_GV_cm').value) * 1e9 * 1e2;
-        const tau = Number(document.getElementById('in_tau_s').value);
-        const Ndot = Number(document.getElementById('in_count_Rate').value);
-        const TDAQ = Number(document.getElementById('in_DAQ').value) * 24 * 3600;
-        const hbar = 1.054e-34;
-        const eCharge = 1.602e-19;
-
-        const de = (hbar / 2) / (Eeff * tau * Math.sqrt(Ndot * TDAQ)) / eCharge * 1e2;
-
-        document.getElementById('out_de').textContent = de.toExponential(2);
-    }
-    </script>
 
 </body>
 </html>
