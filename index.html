@@ -67,6 +67,23 @@ h1 {
     width: 100px;
     font-weight: bold;
 }
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
 </style>
 </head>
 
@@ -90,7 +107,7 @@ h1 {
     </div>
     <div class="form-row">
       <label>Count rate:</label>
-      <input type="number" value="5e7" id="Ndot_Beam"  step="1e7" oninput="compute_Beam()" style="width:80px;"> /s
+      <input type="number" value="1e8" id="Ndot_Beam"  step="1e7" oninput="compute_Beam()" style="width:80px;"> /s
     </div>
     <div class="form-row">
       <label>Data acquisition:</label>
@@ -215,6 +232,96 @@ window.onload = function() {
     compute_Trap_Multi();
 };
 </script>
+
+
+
+<h2>Parameters of Molecules</h2>
+
+<table>
+  <tr>
+    <th>molecule</th>
+    <th>science state</th>
+    <th>E<sub>eff</sub> (GV/cm)</th>
+    <th>intrinsic <br>coherence time &tau; (s)</th>
+    <th>Parity interval (MHz)</th>
+    <th>E-field for<br>
+    polarization (V/cm)</th>
+  </tr>
+  <tr>
+    <td><sup>232</sup>ThO</td>
+    <td><sup>3</sup>&Delta;<sub>1</sub>, J=1</td>
+    <td>78</td>
+    <td>0.005</td>
+    <td>0.36</td>
+    <td>~0.2</td>
+  </tr>
+  
+    <tr>
+    <td><sup>180</sup>HfF<sup>+</sup></td>
+    <td><sup>3</sup>&Delta;<sub>1</sub>, J=1</td>
+    <td>23</td>
+    <td>2.1</td>
+    <td>0.7</td>
+    <td>~0.4</td>
+  </tr>
+  
+    <tr>
+    <td><sup>232</sup>ThF<sup>+</sup></td>
+    <td><sup>3</sup>&Delta;<sub>1</sub>, J=1</td>
+    <td>35</td>
+    <td>&infin;</td>
+    <td>5.3</td>
+    <td>~1.5</td>
+  
+    <tr>
+    <td><sup>138</sup>BaF</td>
+    <td><sup>2</sup>&Sigma;<sup>+</sup>, N=0</td>
+    <td>10</td>
+    <td>&infin;</td>
+    <td>12,000</td>
+    <td>~10,000</td>
+  </tr>
+    
+    <tr>
+    <td><sup>174</sup>YbF</td>
+    <td><sup>2</sup>&Sigma;<sup>+</sup>, N=0</td>
+    <td>-26</td>
+    <td>&infin;</td>
+    <td>14,000</td>
+    <td>~10,000</td>
+  </tr>
+      <tr>
+    <td><sup>174</sup>YbOH</td>
+    <td><sup>2</sup>&Sigma;<sup>+</sup>(010), N=0</td>
+    <td>23</td>
+    <td>~0.5</td>
+    <td>~10</td>
+    <td>~10</td>
+  </tr>
+  
+  <tr>
+    <td><sup>226</sup>RaF</td>
+    <td><sup>2</sup>&Sigma;<sup>+</sup>, N=0</td>
+    <td>52</td>
+    <td>&infin;</td>
+    <td>11,000</td>
+    <td>~10,000</td>
+  </tr>
+  
+    <tr>
+    <td><sup>184</sup>WC</td>
+    <td><sup>3</sup>&Delta;<sub>1</sub>, J=1</td>
+    <td>54</td>
+    <td>&infin;</td>
+    <td>~1</td>
+    <td>~0.5</td>
+  </tr>
+  
+</table>
+
+
+
+
 
 </body>
 </html>
