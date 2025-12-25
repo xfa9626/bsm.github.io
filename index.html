@@ -90,7 +90,7 @@ h1 {
     </div>
     
     <button onclick="compute_beam()">Compute</button>
-    <p>&delta;d<sub>e</sub> = <span id="out_de">0</span> e·cm</p>
+    <p>&delta;d<sub>e</sub> = <span id="out_de_Beam">0</span> e·cm</p>
     
     </div> 
 
@@ -149,16 +149,16 @@ h1 {
 
 
 <script>
-function compute_beam(panel) {
-    const Eeff = Number(document.getElementById('Eeff_Beam'+panel).value) * 1e9 * 1e2;
-    const tau = Number(document.getElementById('tau_Beam'+panel).value);
-    const Ndot = Number(document.getElementById('Ndot_Beam'+panel).value);
-    const TDAQ = Number(document.getElementById('DAQ_Beam'+panel).value) * 24 * 3600;
+function compute_beam() {
+    const Eeff = Number(document.getElementById('Eeff_Beam').value) * 1e9 * 1e2;
+    const tau = Number(document.getElementById('tau_Beam').value);
+    const Ndot = Number(document.getElementById('Ndot_Beam').value);
+    const TDAQ = Number(document.getElementById('DAQ_Beam').value) * 24 * 3600;
     const hbar = 1.054e-34;
     const eCharge = 1.602e-19;
 
     const de = (hbar / 2) / (Eeff * tau * Math.sqrt(Ndot * TDAQ)) / eCharge * 1e2;
-    document.getElementById('out_de'+panel).textContent = de.toExponential(2);
+    document.getElementById('out_de_Beam').textContent = de.toExponential(2);
 }
 </script>
 
