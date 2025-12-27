@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <title>EDM Limit Calculator</title>
 
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -89,18 +97,27 @@ tr:nth-child(even) {
 
 <body>
 
-<h1>Electron EDM Limit Calculator</h1>
+<h1>EDM/MQM/NSM Limit Calculator</h1>
+
+$\delta f = \frac{2}{h}\left(d_e\mathcal{E}_\textrm{eff} + MW_M + SW_S\right)$<br><br>
+
+$\delta f$: frequency resolution<br>
+$d_e$: electron EDM<br>
+$\mathcal{E}_\textrm{eff}$: effective electric field<br>
+$M$: nuclear magnetic quadrupole moment (MQM)<br>
+$W_M$: MQM sensitivity parameter<br>
+$S$: nuclear Schiff moment (NSM)<br>
+$W_S$: NSM sensitivity parameter<br>
+<br>
+<br>
 
 <div class="panel-container">
 
   <div class="panel">
         <div class="caption">beam type </div>
         <div class="example">(e.g. ACME I-III) </div>
-    <img src="eEDM_Beam.png" width="250">
-        <div class="form-row">
-      <label>Effective electric field:</label>
-      <input type="number" value="78" id="Eeff_Beam" oninput="compute_Beam()" style="width:80px;"> GV/cm
-    </div>
+    <img src="df_Beam.png" width="250">
+
     <div class="form-row">
       <label>Spin precession time:</label>
       <input type="number" value="0.005" id="tau_Beam" step="0.001" oninput="compute_Beam()" style="width:80px;"> s
@@ -116,7 +133,7 @@ tr:nth-child(even) {
   <div class="form-row">
       <label><p></p> </label>
           </div>
-    <p>&delta;d<sub>e</sub> = <span id="out_de_Beam">0</span> e·cm</p>
+    <p>$\delta f$ = <span id="out_df_Beam">0</span> $\mu$Hz</p>
     
     </div> 
 
@@ -124,11 +141,7 @@ tr:nth-child(even) {
   <div class="panel">
     <div class="caption">trap type–no multiplexing </div>
     <div class="example">(e.g. JILA EDM I&II)</div>
-    <img src="eEDM_Trap.png" width="250">
-    <div class="form-row">
-      <label>Effective electric field:</label>
-      <input type="number" value="23" id="Eeff_Trap" oninput="compute_Trap()" style="width:80px;"> GV/cm
-    </div>
+    <img src="df_Trap.png" width="250">
     <div class="form-row">
       <label>Spin precession time:</label>
       <input type="number" value="2.0" id="tau_Trap"  step="0.1" oninput="compute_Trap()" style="width:80px;"> s
@@ -144,7 +157,7 @@ tr:nth-child(even) {
     <div class="form-row">
       <label><p></p> </label>
           </div>
-    <p>&delta;d<sub>e</sub> = <span id="out_de_Trap">0</span> e·cm</p>
+    <p>$\delta f$ = <span id="out_df_Trap">0</span> $\mu$Hz</p>
     
     </div> 
 
@@ -152,11 +165,7 @@ tr:nth-child(even) {
   <div class="panel">
     <div class="caption">trap type–multiplexed</div>
     <div class="example">(e.g. JILA EDM III)</div>
-    <img src="eEDM_Trap_Multi.png" width="250">
-    <div class="form-row">
-      <label>Effective electric field:</label>
-      <input type="number" value="35" id="Eeff_Trap_Multi" oninput="compute_Trap_Multi()" style="width:80px;"> GV/cm
-    </div>
+    <img src="df_Trap_Multi.png" width="250">
     <div class="form-row">
       <label>Spin precession time:</label>
       <input type="number" value="20.0" id="tau_Trap_Multi"  step="0.1"  oninput="compute_Trap_Multi()" style="width:80px;"> s
@@ -174,7 +183,7 @@ tr:nth-child(even) {
       <input type="number" value="1" id="DAQ_Trap_Multi" oninput="compute_Trap_Multi()" style="width:80px;"> day
     </div>
     
-    <p>&delta;d<sub>e</sub> = <span id="out_de_Multi">0</span> e·cm</p>
+    <p>$\delta f$ = <span id="out_df_Multi">0</span> $\mu$Hz</p>
     
   </div>
   </div>
@@ -190,6 +199,9 @@ function compute_Beam() {
     const hbar = 1.054e-34;
     const eCharge = 1.602e-19;
 
+    const df = 1 / (2 * Math.PI* tau * Math.sqrt(Ndot * TDAQ)) * 1e6;
+    document.getElementById('out_df_Beam').textContent = df.toExponential(2);
+    
     const de = (hbar / 2) / (Eeff * tau * Math.sqrt(Ndot * TDAQ)) / eCharge * 1e2;
     document.getElementById('out_de_Beam').textContent = de.toExponential(2);
 }
@@ -203,6 +215,9 @@ function compute_Trap() {
     const TDAQ = Number(document.getElementById('DAQ_Trap').value) * 24 * 3600;
     const hbar = 1.054e-34;
     const eCharge = 1.602e-19;
+
+    const df = 1 / (2 * Math.PI * Math.sqrt(tau *Nshot * TDAQ));
+    document.getElementById('out_df_Trap').textContent = df.toExponential(2);
 
     const de = (hbar / 2) / (Eeff * Math.sqrt(tau *Nshot * TDAQ)) / eCharge * 1e2;
     document.getElementById('out_de_Trap').textContent = de.toExponential(2);
@@ -220,6 +235,9 @@ function compute_Trap_Multi() {
     const hbar = 1.054e-34;
     const eCharge = 1.602e-19;
 
+    const df = 1 / (2 * Math.PI * tau * Math.sqrt(Frep *Nshot * TDAQ));
+    document.getElementById('out_df_Multi').textContent = df.toExponential(2);
+    
     const de = (hbar / 2) / (Eeff * tau * Math.sqrt(Frep *Nshot * TDAQ)) / eCharge * 1e2;
     document.getElementById('out_de_Multi').textContent = de.toExponential(2);
 }
