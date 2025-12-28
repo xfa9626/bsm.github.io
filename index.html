@@ -403,8 +403,10 @@ function compute_BSM() {
     const df = Number(document.getElementById('df_BSM').value)*uHz;
     const Eeff = Number(document.getElementById('Eeff_BSM').value)*GV/cm;
     const WM = Number(document.getElementById('WM_BSM').value)*1e33/eCharge/cm/cm;
+    const CM=0.1;
     const M_dq = Number(document.getElementById('Mdq').value)*1e-10*eCharge*cm;
     const WS = Number(document.getElementById('WS_BSM').value)*auToHz;
+    const CS=0.7;
     const S_dq = Number(document.getElementById('Sdq').value)*eCharge*fm**2;
     
     const de = df *(h/2/Eeff);
@@ -416,7 +418,7 @@ function compute_BSM() {
     document.getElementById('out_NP_1_de_BSM').textContent = financial(M_NP_1_de/TeVTokg,0);
     document.getElementById('out_NP_2_de_BSM').textContent = financial(M_NP_2_de/TeVTokg,1);
     
-    const M = df *(1/2./WM);
+    const M = df *(1/2./WM)/CM;
     document.getElementById('out_M_BSM').textContent = (M/eCharge/cm/cm).toExponential(2);
     const dq_MQM=M/M_dq;
     document.getElementById('out_dq_MQM_BSM').textContent = (dq_MQM/cm).toExponential(2);
@@ -428,7 +430,7 @@ function compute_BSM() {
     document.getElementById('out_NP_2_M_BSM').textContent = financial(M_NP_2_MQM/TeVTokg,1);
     
     
-    const S = df *(1/2./WS)*eCharge*fm**3;
+    const S = df *(1/2./WS)/CS*eCharge*fm**3;
     document.getElementById('out_S_BSM').textContent = (S/eCharge/fm**3).toExponential(2);
     const dq_NSM=S/S_dq;
     document.getElementById('out_dq_NSM_BSM').textContent = (dq_NSM/cm).toExponential(2);
