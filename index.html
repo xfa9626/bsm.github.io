@@ -203,47 +203,97 @@ tr:nth-child(even) {
 </div>
 
 <h2>BSM Limit Calculator</h2>
-$\delta f = \frac{2}{h}\left(d_e\mathcal{E}_\textrm{eff} + MW_M + SW_S\right)$<br><br>
 
+
+<style>
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+.left {
+  min-width: 350px;
+}
+.right {
+  max-width: 400px;
+}
+.col {
+min-width: 350px;
+}
+</style>
+<b>conversion from $\delta f$ to CP-violating moments</b><br><br>
+    $\delta f = \frac{2}{h}\left(d_e\mathcal{E}_\textrm{eff} + MW_M + SW_S\right)$
+<br><br>
+    
 $\delta f$: frequency resolution<br>
 $d_e$: electron electric dipole moment (EDM)<br>
 $\mathcal{E}_\textrm{eff}$: effective electric field<br>
 $M$: nuclear magnetic quadrupole moment (MQM)<br>
 $W_M$: MQM sensitivity parameter<br>
 $S$: nuclear Schiff moment (NSM)<br>
-$W_S$: NSM sensitivity parameter<br>
+$W_S$: NSM sensitivity parameter<br><br><br>
+
+<div class="row">
+  <div class="col">
+<b>conversion from $d_e$ to new physics</b><br><br>
+For the electron EDM ($d_e$),
+$$d_e=\frac{e\hbar}{c}\left(\frac{g^2}{16\pi^2}\right)^\ell\frac{m_e}{M_\mathrm{NP}^2}\sin\phi_\mathrm{CP}$$
 <br>
+$g=0.6$: weak coupling constant<br>
+$\phi_\mathrm{CP}$: CP-violating phase (assumed to be $\sin\phi_\mathrm{CP}=$0.7)<br>
+$\ell$: # of loops<br>
+$M_\mathrm{NP}$: new physics mass-scale<br><br>
+  </div>
+  <div class="col">
+<b>conversion from $M$ and $S$ to new physics</b><br><br>
+For MQM ($M$) and NSM ($S$), we first convert to quark chromo-EDMs ($\tilde{d}_{q}$, $q=u,d$), for example,<br><br>
+$M(^{173}\mathrm{Yb})\simeq0.6\times10^{-10}\tilde{d}_q~e\cdot\mathrm{cm}$  <a href="https://doi.org/10.1103/PhysRevA.100.032514">[MSF2019]</a>
+$S(^{225}\mathrm{Ra})\simeq5\times10^{3}\tilde{d}_q~e\cdot\mathrm{fm}^2$  <a href="https://doi.org/10.1103/PhysRevC.56.1357">[SAV1997]</a>
+$S(^{229}\mathrm{Th})\simeq1\times10^{4}\tilde{d}_q~e\cdot\mathrm{fm}^2$  <a href="https://doi.org/10.1103/PhysRevC.99.035501">[F2019]</a>
+<br><br>
+and then use the following formula to estimate the mass scale of new physics<br>
+$$\tilde{d}_{q}=\frac{\hbar}{c}\left(\frac{g^2}{16\pi^2}\right)^\ell\frac{m_{q}}{M_\mathrm{NP}^2}\sin\phi_\mathrm{CP}$$
 <br>
+$g=1.2$: strong coupling constant<br>
+$m_{q}$: quark's mass ($q=u,d$)<br>
+  </div>
+
+</div>
+
+<br>
+
+
+
 
     <!-- showing EDMs -->
 <div class="form-row">
-  <p>frequency resolution $\delta f:~$</p>
+  <p><b>frequency resolution $\delta f:~$</b></p>
   <input type="number" id="df_BSM" value="10.0" step="0.1"
-         style="width:60px;" oninput="compute_Beam()">  $\mu$Hz 
+         style="width:60px;" oninput="compute_BSM()">  $\mu$Hz 
 </div>   
 <div class="form-row">
   <label2>$\mathcal{E}_{\rm eff}$:</label2>
   <input type="number" id="Eeff_Beam" value="78" step="1"
-         style="width:40px;" oninput="compute_Beam()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Beam">0</span>$~e\cdot{\rm cm}$
+         style="width:40px;" oninput="compute_BSM()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Beam">0</span>$~e\cdot{\rm cm}$
 </div>   
 
 <div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
+  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_BSM">0</span>$~\boldsymbol{\mathrm{TeV}}$
 </div> 
 
 <div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
+  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_BSM">0</span>$~\boldsymbol{\mathrm{TeV}}$
 </div> 
 
 <div class="form-row">
   <label2>$W_M$:</label2>
   <input type="number" id="WM_Beam" value="1.0" step="0.1"
-         style="width:40px;" oninput="compute_Beam()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$  $\rightarrow M =~$ <span id="out_M_Beam">0</span>$~e\cdot{\rm cm}^2$
+         style="width:40px;" oninput="compute_BSM()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$  $\rightarrow M =~$ <span id="out_M_BSM">0</span>$~e\cdot{\rm cm}^2$
 </div> 
 <div class="form-row">
   <label2>$W_S$:</label2>
   <input type="number" id="WS_Beam" value="30000" step="1000"
-         style="width:60px;" oninput="compute_Beam()">  a.u. $~~~~~~~~~~~~~~~~~~\rightarrow S =~$ <span id="out_S_Beam">0</span>$~e\cdot{\rm fm}^3$
+         style="width:60px;" oninput="compute_BSM()">  a.u. $~~~~~~~~~~~~~~~~~~\rightarrow S =~$ <span id="out_S_BSM">0</span>$~e\cdot{\rm fm}^3$
 </div> 
 
 <script>
@@ -323,23 +373,6 @@ function compute_Trap_Multi() {
     const df = 1 / (2*Math.PI*tau*Math.sqrt(Frep*Nshot*TDAQ))*1e6;
     document.getElementById('out_df_Multi').textContent = financial(df,3);
 
-    const Eeff = Number(document.getElementById('Eeff_Trap_Multi').value)*1e9*1e2;
-    const de = df*1e-6*(2*Math.PI*hbar/2)/Eeff/eCharge*1e2;
-    document.getElementById('out_de_Trap_Multi').textContent = de.toExponential(2);
-
-    const NP_de_1 = 48*Math.sqrt(1e-29/de);
-    document.getElementById('out_NP_1_de_Trap_multi').textContent = financial(NP_de_1,0);
-
-    const NP_de_2 = 2*Math.sqrt(1e-29/de);
-    document.getElementById('out_NP_2_de_Trap_multi').textContent = financial(NP_de_2,1);
-
-    const WM = Number(document.getElementById('WM_Trap_Multi').value)*1e33;
-    const MQM = df*1e-6/2/WM;
-    document.getElementById('out_M_Trap_Multi').textContent = MQM.toExponential(2);
-
-    const WS = Number(document.getElementById('WS_Trap_Multi').value) * 44.8;
-    const SM = df*1e-6 /2/ WS;
-    document.getElementById('out_S_Trap_Multi').textContent = SM.toExponential(2);
 }
 </script>
 
