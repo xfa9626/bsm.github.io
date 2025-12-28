@@ -4,13 +4,12 @@
 <meta charset="UTF-8">
 <title>EDM Limit Calculator</title>
 
-  <script>
-    window.MathJax = {
-      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
-    };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
 body {
@@ -25,14 +24,12 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* side-by-side container */
 .panel-container {
     display: flex;
     gap: 90px;
     align-items: flex-start;
 }
 
-/* each column */
 .panel {
     display: flex;
     flex-direction: column;
@@ -60,17 +57,6 @@ h1 {
     align-items: center;
     margin-bottom: 10px;
 }
-.form-row2 {
-    display: flex;
-    align-items: right;
-    margin-bottom: 10px;
-}
-
-.form-row2 label {
-    width: 250px;
-    align-items: right;
-    font-weight: bold;
-}
 
 .form-row label {
     width: 250px;
@@ -78,23 +64,8 @@ h1 {
 }
 
 .form-row input {
-    width: 100px;
+    width: 80px;
     margin-right: 5px;
-}
-
-.form-row label2 {
-    width: 40px;
-    font-weight: bold;
-}
-
-.form-row input2 {
-    width: 200px;
-    margin-right: 5px;
-}
-
-.form-row title {
-    width: 100px;
-    font-weight: bold;
 }
 
 table {
@@ -111,7 +82,6 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
-
 </style>
 </head>
 
@@ -119,193 +89,195 @@ tr:nth-child(even) {
 
 <h1>EDM/MQM/NSM Limit Calculator</h1>
 
-$\delta f = \frac{2}{h}\left(d_e\mathcal{E}_\textrm{eff} + MW_M + SW_S\right)$<br><br>
+<p>
+$\delta f = \frac{2}{h}\left(d_e\mathcal{E}_\textrm{eff} + MW_M + SW_S\right)$
+</p>
 
+<p>
 $\delta f$: frequency resolution<br>
 $d_e$: electron electric dipole moment (EDM)<br>
 $\mathcal{E}_\textrm{eff}$: effective electric field<br>
 $M$: nuclear magnetic quadrupole moment (MQM)<br>
 $W_M$: MQM sensitivity parameter<br>
 $S$: nuclear Schiff moment (NSM)<br>
-$W_S$: NSM sensitivity parameter<br>
-<br>
-<br>
+$W_S$: NSM sensitivity parameter
+</p>
 
 <div class="panel-container">
 
-  <div class="panel">
-        <div class="caption">beam type </div>
-        <div class="example">(e.g. ACME I-III) </div>
+<!-- Beam panel -->
+<div class="panel">
+    <div class="caption">beam type</div>
+    <div class="example">(e.g. ACME I-III)</div>
     <img src="df_Beam.png" width="250">
 
     <div class="form-row">
       <label>Spin precession time:</label>
-      <input type="number" value="0.005" id="tau_Beam" step="0.001" oninput="compute_Beam()" style="width:80px;"> s
+      <input type="number" value="0.005" id="tau_Beam" step="0.001" oninput="compute_Beam()"> s
     </div>
     <div class="form-row">
       <label>Count rate:</label>
-      <input type="number" value="3e8" id="Ndot_Beam"  step="1e7" oninput="compute_Beam()" style="width:80px;"> /s
+      <input type="number" value="3e8" id="Ndot_Beam" step="1e7" oninput="compute_Beam()"> /s
     </div>
     <div class="form-row">
       <label>Data acquisition:</label>
-      <input type="number" value="1" id="DAQ_Beam" oninput="compute_Beam()" style="width:80px;"> day
+      <input type="number" value="1" id="DAQ_Beam" oninput="compute_Beam()"> day
     </div>
-  <div class="form-row">
-      <label><p></p> </label>
-          </div>
-    <p>$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\rightarrow\delta f$ = <span id="out_df_Beam">0</span> $\mu$Hz</p>
-    <br>
-    <!-- showing EDMs -->
-    
 
-<div class="form-row">
-  <label2>$\mathcal{E}_{\rm eff}$:</label2>
-  <input type="number" id="Eeff_Beam" value="78" step="1"
-         style="width:40px;" oninput="compute_Beam()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Beam">0</span>$~e\cdot{\rm cm}$
-</div>   
+    <p>$\rightarrow\delta f$ = <span id="out_df_Beam">0</span> $\mu$Hz</p>
 
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
+    <div class="form-row">
+      <label>$\mathcal{E}_{\rm eff}$:</label>
+      <input type="number" id="Eeff_Beam" value="78" step="1" oninput="compute_Beam()"> GV/cm
+      $\rightarrow d_e =~$ <span id="out_de_Beam">0</span>$~e\cdot{\rm cm}$
+    </div>
 
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
-
-<div class="form-row">
-  <label2>$W_M$:</label2>
-  <input type="number" id="WM_Beam" value="1" step="1"
-         style="width:40px;" oninput="compute_Beam()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$  $\rightarrow M =~$ <span id="out_M_Beam">0</span>$~e\cdot{\rm cm}^2$
-</div> 
-<div class="form-row">
-  <label2>$W_S$:</label2>
-  <input type="number" id="WS_Beam" value="30000" step="1000"
-         style="width:60px;" oninput="compute_Beam()">  a.u. $~~~~~~~~~~~~~~~~~~\rightarrow S =~$ <span id="out_S_Beam">0</span>$~e\cdot{\rm fm}^3$
-</div> 
-
+    <div class="form-row">
+      <label></label>
+      $\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Beam">0</span>$~\mathrm{TeV}$
     </div> 
 
+    <div class="form-row">
+      <label></label>
+      $\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Beam">0</span>$~\mathrm{TeV}$
+    </div> 
 
-  <div class="panel">
-    <div class="caption">trap type–no multiplexing </div>
+    <div class="form-row">
+      <label>$W_M$:</label>
+      <input type="number" id="WM_Beam" value="1" step="1" oninput="compute_Beam()"> $\times10^{33}$ Hz/$e\cdot\rm{cm}^2~$
+      $\rightarrow M =~$ <span id="out_M_Beam">0</span>$~e\cdot{\rm cm}^2$
+    </div> 
+
+    <div class="form-row">
+      <label>$W_S$:</label>
+      <input type="number" id="WS_Beam" value="30000" step="1000" oninput="compute_Beam()"> a.u.
+      $\rightarrow S =~$ <span id="out_S_Beam">0</span>$~e\cdot{\rm fm}^3$
+    </div> 
+</div>
+
+<!-- Trap panel -->
+<div class="panel">
+    <div class="caption">trap type – no multiplexing</div>
     <div class="example">(e.g. JILA EDM I&II)</div>
     <img src="df_Trap.png" width="250">
+
     <div class="form-row">
       <label>Spin precession time:</label>
-      <input type="number" value="2.0" id="tau_Trap"  step="0.1" oninput="compute_Trap()" style="width:80px;"> s
+      <input type="number" value="2.0" id="tau_Trap" step="0.1" oninput="compute_Trap()"> s
     </div>
     <div class="form-row">
       <label>N per shot:</label>
-      <input type="number" value="500" id="Nshot_Trap"  step="10" oninput="compute_Trap()" style="width:80px;">
+      <input type="number" value="500" id="Nshot_Trap" step="10" oninput="compute_Trap()">
     </div>
     <div class="form-row">
       <label>Data acquisition:</label>
-      <input type="number" value="1" id="DAQ_Trap" oninput="compute_Trap()" style="width:80px;"> day
+      <input type="number" value="1" id="DAQ_Trap" oninput="compute_Trap()"> day
     </div>
+
+    <p>$\rightarrow\delta f$ = <span id="out_df_Trap">0</span> $\mu$Hz</p>
+
     <div class="form-row">
-      <label><p></p> </label>
-          </div>
-    <p>$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\rightarrow\delta f$ = <span id="out_df_Trap">0</span> $\mu$Hz</p>
-    <br>
-        <!-- showing EDMs -->
-<div class="form-row">
-  <label2>$\mathcal{E}_{\rm eff}$:</label2>
-  <input type="number" id="Eeff_Trap" value="78" step="1"
-         style="width:40px;" oninput="compute_Trap()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Trap">0</span>$~e\cdot{\rm cm}$
-</div> 
+      <label>$\mathcal{E}_{\rm eff}$:</label>
+      <input type="number" id="Eeff_Trap" value="23" step="1" oninput="compute_Trap()"> GV/cm
+      $\rightarrow d_e =~$ <span id="out_de_Trap">0</span>$~e\cdot{\rm cm}$
+    </div>
 
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Trap">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
-
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Trap">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
-
-<div class="form-row">
-  <label2>$W_M$:</label2>
-  <input type="number" id="WM_Trap" value="1" step="1"
-         style="width:40px;" oninput="compute_Trap()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$ $\rightarrow M =~$ <span id="out_M_Trap">0</span>$~e\cdot{\rm cm}^2$
-</div> 
-<div class="form-row">
-  <label2>$W_S$:</label2>
-  <input type="number" id="WS_Trap" value="30000" step="1000"
-         style="width:60px;" oninput="compute_Trap()">  a.u. $~~~~~~~~~~~~~~~~~~\rightarrow S =~$ <span id="out_S_Trap">0</span>$~e\cdot{\rm fm}^3$
-</div> 
-    
+    <div class="form-row">
+      <label></label>
+      $\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Trap">0</span>$~\mathrm{TeV}$
     </div> 
 
+    <div class="form-row">
+      <label></label>
+      $\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Trap">0</span>$~\mathrm{TeV}$
+    </div> 
 
-  <div class="panel">
-    <div class="caption">trap type–multiplexed</div>
+    <div class="form-row">
+      <label>$W_M$:</label>
+      <input type="number" id="WM_Trap" value="1" step="1" oninput="compute_Trap()"> $\times10^{33}$ Hz/$e\cdot\rm{cm}^2~$
+      $\rightarrow M =~$ <span id="out_M_Trap">0</span>$~e\cdot{\rm cm}^2$
+    </div> 
+
+    <div class="form-row">
+      <label>$W_S$:</label>
+      <input type="number" id="WS_Trap" value="30000" step="1000" oninput="compute_Trap()"> a.u.
+      $\rightarrow S =~$ <span id="out_S_Trap">0</span>$~e\cdot{\rm fm}^3$
+    </div>
+</div>
+
+<!-- Trap multiplexed panel -->
+<div class="panel">
+    <div class="caption">trap type – multiplexed</div>
     <div class="example">(e.g. JILA EDM III)</div>
     <img src="df_Trap_Multi.png" width="250">
+
     <div class="form-row">
       <label>Spin precession time:</label>
-      <input type="number" value="20.0" id="tau_Trap_Multi"  step="0.1"  oninput="compute_Trap_Multi()" style="width:80px;"> s
+      <input type="number" value="20.0" id="tau_Trap_Multi" step="0.1" oninput="compute_Trap_Multi()"> s
     </div>
     <div class="form-row">
       <label>N per shot:</label>
-      <input type="number" value="50" id="Nshot_Trap_Multi" oninput="compute_Trap_Multi()" style="width:80px;">
+      <input type="number" value="50" id="Nshot_Trap_Multi" oninput="compute_Trap_Multi()">
     </div>
     <div class="form-row">
       <label>Rep rate:</label>
-      <input type="number" value="2" id="Frep_Trap_Multi" oninput="compute_Trap_Multi()" style="width:80px;"> Hz
+      <input type="number" value="2" id="Frep_Trap_Multi" oninput="compute_Trap_Multi()"> Hz
     </div>
     <div class="form-row">
       <label>Data acquisition:</label>
-      <input type="number" value="1" id="DAQ_Trap_Multi" oninput="compute_Trap_Multi()" style="width:80px;"> day
+      <input type="number" value="1" id="DAQ_Trap_Multi" oninput="compute_Trap_Multi()"> day
     </div>
-    
-    <p>$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\rightarrow\delta f$ = <span id="out_df_Multi">0</span> $\mu$Hz</p>
-    <br>
-            <!-- showing EDMs -->
-<div class="form-row">
-  <label2>$\mathcal{E}_{\rm eff}$:</label2>
-  <input type="number" id="Eeff_Trap_Multi" value="78" step="1"
-         style="width:40px;" oninput="compute_Trap_Multi()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Trap_Multi">0</span>$~e\cdot{\rm cm}$
-</div>   
 
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Trap_multi">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
+    <p>$\rightarrow\delta f$ = <span id="out_df_Multi">0</span> $\mu$Hz</p>
 
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Trap_multi">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
+    <div class="form-row">
+      <label>$\mathcal{E}_{\rm eff}$:</label>
+      <input type="number" id="Eeff_Trap_Multi" value="35" step="1" oninput="compute_Trap_Multi()"> GV/cm
+      $\rightarrow d_e =~$ <span id="out_de_Trap_Multi">0</span>$~e\cdot{\rm cm}$
+    </div>
 
-<div class="form-row">
-  <label2>$W_M$:</label2>
-  <input type="number" id="WM_Trap_Multi" value="1" step="1"
-         style="width:40px;" oninput="compute_Trap_Multi()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$ $\rightarrow M =~$ <span id="out_M_Trap_Multi">0</span>$~e\cdot{\rm cm}^2$
-</div> 
-<div class="form-row">
-  <label2>$W_S$:</label2>
-  <input type="number" id="WS_Trap_Multi" value="30000" step="1000"
-         style="width:60px;" oninput="compute_Trap_Multi()">  a.u. $~~~~~~~~~~~~~~~~~~\rightarrow S =~$ <span id="out_S_Trap_Multi">0</span>$~e\cdot{\rm fm}^3$
-</div> 
-    
-  </div>
-  </div>
+    <div class="form-row">
+      <label></label>
+      $\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Trap_multi">0</span>$~\mathrm{TeV}$
+    </div> 
+
+    <div class="form-row">
+      <label></label>
+      $\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Trap_multi">0</span>$~\mathrm{TeV}$
+    </div> 
+
+    <div class="form-row">
+      <label>$W_M$:</label>
+      <input type="number" id="WM_Trap_Multi" value="1" step="1" oninput="compute_Trap_Multi()"> $\times10^{33}$ Hz/$e\cdot\rm{cm}^2~$
+      $\rightarrow M =~$ <span id="out_M_Trap_Multi">0</span>$~e\cdot{\rm cm}^2$
+    </div> 
+
+    <div class="form-row">
+      <label>$W_S$:</label>
+      <input type="number" id="WS_Trap_Multi" value="30000" step="1000" oninput="compute_Trap_Multi()"> a.u.
+      $\rightarrow S =~$ <span id="out_S_Trap_Multi">0</span>$~e\cdot{\rm fm}^3$
+    </div>
 </div>
 
+</div>
 
 <script>
+function financial(x,i){ return Number.parseFloat(x).toFixed(i); }
+
 function compute_Beam() {
-    
     const tau = Number(document.getElementById('tau_Beam').value);
     const Ndot = Number(document.getElementById('Ndot_Beam').value);
-    const TDAQ = Number(document.getElementById('DAQ_Beam').value) * 24 * 3600;
+    const TDAQ = Number(document.getElementById('DAQ_Beam').value) * 24*3600;
     const hbar = 1.054e-34;
     const eCharge = 1.602e-19;
 
-    const df = 1 / (2 * Math.PI* tau * Math.sqrt(Ndot * TDAQ)) * 1e6;
+    const df = 1 / (2*Math.PI*tau*Math.sqrt(Ndot*TDAQ))*1e6;
     document.getElementById('out_df_Beam').textContent = financial(df,3);
-    
-    const Eeff = Number(document.getElementById('Eeff_Beam').value) * 1e9 * 1e2;
-    const de = df*1e-6 *(2*Math.PI *hbar/2)/ Eeff / eCharge * 1e2;
+
+    const Eeff = Number(document.getElementById('Eeff_Beam').value)*1e9*1e2;
+    const de = df*1e-6*(2*Math.PI*hbar/2)/Eeff/eCharge*1e2;
     document.getElementById('out_de_Beam').textContent = de.toExponential(2);
-     
+
     const NP_de_1 = 48*Math.sqrt(1e-29/de);
     document.getElementById('out_NP_1_de_Beam').textContent = financial(NP_de_1,0);
 
@@ -313,49 +285,43 @@ function compute_Beam() {
     document.getElementById('out_NP_2_de_Beam').textContent = financial(NP_de_2,0);
 
     const WM = Number(document.getElementById('WM_Beam').value)*1e33;
-    const MQM = df*1e-6 /2/ WM;
-    document.getElementById('out_M_Beam').textContent = MQM.toExponential(2);   
+    const MQM = df*1e-6/2/WM;
+    document.getElementById('out_M_Beam').textContent = MQM.toExponential(2);
 
-    const WS = Number(document.getElementById('WS_Beam').value) * 44.8; // 44.8 is a.u. to Hz/e*fm^3
+    const WS = Number(document.getElementById('WS_Beam').value) * 44.8;
     const SM = df*1e-6 /2/ WS;
     document.getElementById('out_S_Beam').textContent = SM.toExponential(2);
 }
-</script>
 
-   <script>
 function compute_Trap() {
-
     const tau = Number(document.getElementById('tau_Trap').value);
     const Nshot = Number(document.getElementById('Nshot_Trap').value);
-    const TDAQ = Number(document.getElementById('DAQ_Trap').value) * 24 * 3600;
+    const TDAQ = Number(document.getElementById('DAQ_Trap').value) * 24*3600;
     const hbar = 1.054e-34;
     const eCharge = 1.602e-19;
 
-    const df = 1 / (2 * Math.PI * Math.sqrt(tau *Nshot * TDAQ)) * 1e6;
+    const df = 1 / (2*Math.PI*Math.sqrt(tau*Nshot*TDAQ))*1e6;
     document.getElementById('out_df_Trap').textContent = financial(df,3);
-    
-    const Eeff = Number(document.getElementById('Eeff_Trap').value) * 1e9 * 1e2;
-    const de = df*1e-6 *(2*Math.PI *hbar/2)/ Eeff / eCharge * 1e2;
+
+    const Eeff = Number(document.getElementById('Eeff_Trap').value)*1e9*1e2;
+    const de = df*1e-6*(2*Math.PI*hbar/2)/Eeff/eCharge*1e2;
     document.getElementById('out_de_Trap').textContent = de.toExponential(2);
-      
+
     const NP_de_1 = 48*Math.sqrt(1e-29/de);
     document.getElementById('out_NP_1_de_Trap').textContent = financial(NP_de_1,0);
 
     const NP_de_2 = 2*Math.sqrt(1e-29/de);
     document.getElementById('out_NP_2_de_Trap').textContent = financial(NP_de_2,0);
-    
-    const WM = Number(document.getElementById('WM_Trap').value)*1e33;
-    const MQM = df*1e-6 /2/ WM;
-    document.getElementById('out_M_Trap').textContent = MQM.toExponential(2);   
 
-    const WS = Number(document.getElementById('WS_Trap').value) * 44.8; // 44.8 is a.u. to Hz/e*fm^3
+    const WM = Number(document.getElementById('WM_Trap').value)*1e33;
+    const MQM = df*1e-6/2/WM;
+    document.getElementById('out_M_Trap').textContent = MQM.toExponential(2);
+
+    const WS = Number(document.getElementById('WS_Trap').value) * 44.8;
     const SM = df*1e-6 /2/ WS;
     document.getElementById('out_S_Trap').textContent = SM.toExponential(2);
 }
-</script>
 
-    
-    <script>
 function compute_Trap_Multi() {
     const tau = Number(document.getElementById('tau_Trap_Multi').value);
     const Nshot = Number(document.getElementById('Nshot_Trap_Multi').value);
@@ -385,127 +351,13 @@ function compute_Trap_Multi() {
     const SM = df*1e-6 /2/ WS;
     document.getElementById('out_S_Trap_Multi').textContent = SM.toExponential(2);
 }
-</script>
 
-<script>
-window.onload = function() {
+window.onload = function(){
     compute_Beam();
     compute_Trap();
     compute_Trap_Multi();
 };
-
-function financial(x,i) {
-  return Number.parseFloat(x).toFixed(i);
-}
 </script>
-
-
-
-<h2>Parameters of Molecules</h2>
-
-<table>
-  <tr>
-    <th>molecule</th>
-    <th>science state</th>
-    <th>E<sub>eff</sub> (GV/cm)</th>
-    <th>intrinsic coherence<br> time &tau; (s)</th>
-    <th>Parity interval (MHz)</th>
-    <th>E-field for<br>
-    polarization (V/cm)</th>
-  </tr>
-  <tr>
-    <td><sup>232</sup>ThO</td>
-    <td><sup>3</sup>&Delta;<sub>1</sub>, J=1</td>
-    <td>78</td>
-    <td>0.005</td>
-    <td>0.36</td>
-    <td>~0.2</td>
-  </tr>
-  
-    <tr>
-    <td><sup>180</sup>HfF<sup>+</sup></td>
-    <td><sup>3</sup>&Delta;<sub>1</sub>, J=1</td>
-    <td>23</td>
-    <td>2.1</td>
-    <td>0.7</td>
-    <td>~0.4</td>
-  </tr>
-  
-    <tr>
-    <td><sup>232</sup>ThF<sup>+</sup></td>
-    <td><sup>3</sup>&Delta;<sub>1</sub>, J=1</td>
-    <td>35</td>
-    <td>&infin;</td>
-    <td>5.3</td>
-    <td>~1.5</td>
-  
-    <tr>
-    <td><sup>138</sup>BaF</td>
-    <td><sup>2</sup>&Sigma;<sup>+</sup>, N=0</td>
-    <td>10</td>
-    <td>&infin;</td>
-    <td>12,000</td>
-    <td>~10,000</td>
-  </tr>
-    
-    <tr>
-    <td><sup>174</sup>YbF</td>
-    <td><sup>2</sup>&Sigma;<sup>+</sup>, N=0</td>
-    <td>26</td>
-    <td>&infin;</td>
-    <td>14,000</td>
-    <td>~10,000</td>
-  </tr>
-      <tr>
-    <td><sup>174</sup>YbOH</td>
-    <td><sup>2</sup>&Sigma;<sup>+</sup>(010), N=0</td>
-    <td>23</td>
-    <td>~0.5</td>
-    <td>~10</td>
-    <td>~10</td>
-  </tr>
-  
-  <tr>
-    <td><sup>226</sup>RaF</td>
-    <td><sup>2</sup>&Sigma;<sup>+</sup>, N=0</td>
-    <td>52</td>
-    <td>&infin;</td>
-    <td>11,000</td>
-    <td>~10,000</td>
-  </tr>
-   
-  <tr>
-    <td><sup>226</sup>RaOH</td>
-    <td><sup>2</sup>&Sigma;<sup>+</sup>(010), N=0</td>
-    <td>52</td>
-    <td>~0.5</td>
-    <td>~10</td>
-    <td>~10</td>
-  </tr>
-  
-    <tr>
-    <td><sup>184</sup>WC</td>
-    <td><sup>3</sup>&Delta;<sub>1</sub>, J=1</td>
-    <td>54</td>
-    <td>&infin;</td>
-    <td>~1</td>
-    <td>~0.5</td>
-  </tr>
-      
-    <tr>
-    <td><sup>197</sup>Au<sup>208</sup>Pb</td>
-    <td><sup>2</sup>&Pi;<sub>1/2</sub>, J=1/2</td>
-    <td>39</td>
-    <td>&infin;</td>
-    <td>~1000</td>
-    <td>~500</td>
-  </tr>
-  
-</table>
-
-
-
-
 
 </body>
 </html>
