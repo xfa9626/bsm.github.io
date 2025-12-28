@@ -86,6 +86,13 @@ h1 {
     font-weight: bold;
 }
 
+.form-row2 {
+    display: grid;
+    grid-template-columns: 70px 70px 1fr;
+    align-items: center;
+    margin-bottom: 6px;
+    column-gap: 6px;
+}
 
 table {
   font-family: arial, sans-serif;
@@ -144,21 +151,24 @@ $W_S$: NSM sensitivity parameter<br>
       <label><p></p> </label>
           </div>
     <p>$\delta f$ = <span id="out_df_Beam">0</span> $\mu$Hz</p>
+    <br>
     <!-- showing EDMs -->
+    
+
 <div class="form-row">
   <label2>$\mathcal{E}_{\rm eff}$:</label2>
   <input type="number" id="Eeff_Beam" value="78" step="1"
-         style="width:40px;" oninput="compute_Beam()">  GV/cm → $~d_e =~$ <span id="out_de_Beam">0</span>$~e\cdot{\rm cm}$
+         style="width:40px;" oninput="compute_Beam()">  GV/cm $~~~~~~\rightarrow d_e =~$ <span id="out_de_Beam">0</span>$~e\cdot{\rm cm}$
 </div>   
 <div class="form-row">
   <label2>$W_M$:</label2>
   <input type="number" id="WM_Beam" value="1" step="1"
-         style="width:60px;" oninput="compute_Beam()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$ → $~M =~$ <span id="out_M_Beam">0</span>$~e\cdot{\rm fm}^2$
+         style="width:60px;" oninput="compute_Beam()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$  $\rightarrow M =~$ <span id="out_M_Beam">0</span>$~e\cdot{\rm cm}^2$
 </div> 
 <div class="form-row">
   <label2>$W_S$:</label2>
   <input type="number" id="WS_Beam" value="30000" step="1"
-         style="width:60px;" oninput="compute_Beam()">  a.u. → $~S =~$ <span id="out_S_Beam">0</span>$~e\cdot{\rm fm}^3$
+         style="width:60px;" oninput="compute_Beam()">  a.u. $~~~~~~\rightarrow S =~$ <span id="out_S_Beam">0</span>$~e\cdot{\rm fm}^3$
 </div> 
 
     </div> 
@@ -184,22 +194,22 @@ $W_S$: NSM sensitivity parameter<br>
       <label><p></p> </label>
           </div>
     <p>$\delta f$ = <span id="out_df_Trap">0</span> $\mu$Hz</p>
-    
+    <br>
         <!-- showing EDMs -->
 <div class="form-row">
   <label2>$\mathcal{E}_{\rm eff}$:</label2>
-  <input type="number" id="Eeff_Trap_Multi" value="78" step="1"
-         style="width:40px;" oninput="compute_Trap_Multi()">  GV/cm → $~d_e =~$ <span id="out_de_Trap_Multi">0</span>$~e\cdot{\rm cm}$
+  <input type="number" id="Eeff_Trap" value="78" step="1"
+         style="width:40px;" oninput="compute_Trap()">  GV/cm $~~~~~~\rightarrow d_e =~$ <span id="out_de_Trap">0</span>$~e\cdot{\rm cm}$
 </div>   
 <div class="form-row">
   <label2>$W_M$:</label2>
-  <input type="number" id="WM_Trap_Multi" value="1" step="1"
-         style="width:60px;" oninput="compute_Trap_Multi()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$ → $~M =~$ <span id="out_M_Trap_Multi">0</span>$~e\cdot{\rm fm}^2$
+  <input type="number" id="WM_Trap" value="1" step="1"
+         style="width:60px;" oninput="compute_Trap()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$ $\rightarrow M =~$ <span id="out_M_Trap">0</span>$~e\cdot{\rm cm}^2$
 </div> 
 <div class="form-row">
   <label2>$W_S$:</label2>
-  <input type="number" id="WS_Trap_Multi" value="30000" step="1"
-         style="width:60px;" oninput="compute_Trap_Multi()">  a.u. → $~S =~$ <span id="out_S_Trap_Multi">0</span>$~e\cdot{\rm fm}^3$
+  <input type="number" id="WS_Trap" value="30000" step="1"
+         style="width:60px;" oninput="compute_Trap()">  a.u. $~~~~~~\rightarrow S =~$ <span id="out_S_Trap">0</span>$e\cdot{\rm fm}^3$
 </div> 
     
     </div> 
@@ -227,22 +237,22 @@ $W_S$: NSM sensitivity parameter<br>
     </div>
     
     <p>$\delta f$ = <span id="out_df_Multi">0</span> $\mu$Hz</p>
-    
+    <br>
             <!-- showing EDMs -->
 <div class="form-row">
   <label2>$\mathcal{E}_{\rm eff}$:</label2>
-  <input type="number" id="Eeff_Trap" value="78" step="1"
-         style="width:40px;" oninput="compute_Trap()">  GV/cm → $~d_e =~$ <span id="out_de_Trap">0</span>$~e\cdot{\rm cm}$
+  <input type="number" id="Eeff_Trap_Multi" value="78" step="1"
+         style="width:40px;" oninput="compute_Trap_Multi()">  GV/cm $~~~~~~\rightarrow d_e =~$ <span id="out_de_Trap_Multi">0</span>$~e\cdot{\rm cm}$
 </div>   
 <div class="form-row">
   <label2>$W_M$:</label2>
-  <input type="number" id="WM_Trap" value="1" step="1"
-         style="width:60px;" oninput="compute_Trap()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$ → $~M =~$ <span id="out_M_Trap">0</span>$~e\cdot{\rm fm}^2$
+  <input type="number" id="WM_Trap_Multi" value="1" step="1"
+         style="width:60px;" oninput="compute_Trap_Multi()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$ $\rightarrow M =~$ <span id="out_M_Trap_Multi">0</span>$~e\cdot{\rm cm}^2$
 </div> 
 <div class="form-row">
   <label2>$W_S$:</label2>
-  <input type="number" id="WS_Trap" value="30000" step="1"
-         style="width:60px;" oninput="compute_Trap()">  a.u. → $~S =~$ <span id="out_S_Trap">0</span>$~e\cdot{\rm fm}^3$
+  <input type="number" id="WS_Trap_Multi" value="30000" step="1"
+         style="width:60px;" oninput="compute_Trap_Multi()">  a.u. $~~~~~~\rightarrow S =~$ <span id="out_S_Trap_Multi">0</span>$~e\cdot{\rm fm}^3$
 </div> 
     
   </div>
