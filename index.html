@@ -297,7 +297,7 @@ $m_{q}$: quark's mass ($q=u,d$)<br>
          style="width:40px;" oninput="compute_BSM()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$  $\rightarrow M =~$ <span id="out_M_BSM">0</span>$~e\cdot{\rm cm}^2$
 </div> 
 <div class="form-row">
-  $~~~M/\tilde{d}_q:$ <input type="number" id="Mdq" value="1.0" step="0.1"
+  $~~~M/\tilde{d}_q:$ <input type="number" id="Mdq" value="0.6" step="0.1"
          style="width:40px;" oninput="compute_BSM()">$\times10^{-10}e\cdot\rm{cm}~$  $~~~~ \tilde{d}_q= $ <span id="out_dq_MQM_BSM">0</span>$~\mathrm{cm}$
 </div> 
 
@@ -309,14 +309,14 @@ $m_{q}$: quark's mass ($q=u,d$)<br>
 </div> 
 <div class="form-row">
   <label2>$W_S$:</label2>
-  <input type="number" id="WS_BSM" value="30000" step="1000"
+  <input type="number" id="WS_BSM" value="40000" step="1000"
          style="width:60px;" oninput="compute_BSM()">  a.u. $~~~~~~~~~~~~~~~~~~\rightarrow S =~$ <span id="out_S_BSM">0</span>$~e\cdot{\rm fm}^3$
 </div>
 
 <!-- NSM -->
 <div class="form-row">
   $~~~S/\tilde{d}_q:$ <input type="number" id="Sdq" value="5000" step="100"
-         style="width:60px;" oninput="compute_BSM()">$e\cdot\rm{fm}^2~$    $~~~~ \tilde{d}_q= $ <span id="out_dq_NSM_BSM">0</span>$~\mathrm{cm}$
+         style="width:60px;" oninput="compute_BSM()">$e\cdot\rm{fm}^2~$    $~~~~~~~~~~~~ \tilde{d}_q= $ <span id="out_dq_NSM_BSM">0</span>$~\mathrm{cm}$
 </div> 
 <div class="form-row">
   <label2></label2>$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$ <span id="out_NP_1_S_BSM">0</span>$~\boldsymbol{\mathrm{TeV}}$
@@ -409,8 +409,8 @@ function compute_BSM() {
     const dq_MQM=M/M_dq;
     document.getElementById('out_dq_MQM_BSM').textContent = (dq_MQM/cm).toExponential(2);
     
-    const S = df *(1/2./WS);
-    document.getElementById('out_S_BSM').textContent = S.toExponential(2);
+    const S = df *(1/2./WS)*eCharge*fm**3;
+    document.getElementById('out_S_BSM').textContent = (S/eCharge/fm**3).toExponential(2);
     const dq_NSM=S/S_dq;
     document.getElementById('out_dq_NSM_BSM').textContent = (dq_NSM/cm).toExponential(2);
 }
