@@ -310,7 +310,7 @@ function compute_Beam() {
     document.getElementById('out_NP_1_de_Beam').textContent = financial(NP_de_1,0);
 
     const NP_de_2 = 2*Math.sqrt(1e-29/de);
-    document.getElementById('out_NP_2_de_Beam').textContent = financial(NP_de_2,0);
+    document.getElementById('out_NP_2_de_Beam').textContent = financial(NP_de_2,1);
 
     const WM = Number(document.getElementById('WM_Beam').value)*1e33;
     const MQM = df*1e-6 /2/ WM;
@@ -342,7 +342,7 @@ function compute_Trap() {
     document.getElementById('out_NP_1_de_Trap').textContent = financial(NP_de_1,0);
 
     const NP_de_2 = 2*Math.sqrt(1e-29/de);
-    document.getElementById('out_NP_2_de_Trap').textContent = financial(NP_de_2,0);
+    document.getElementById('out_NP_2_de_Trap').textContent = financial(NP_de_2,1);
     
     const WM = Number(document.getElementById('WM_Trap').value)*1e33;
     const MQM = df*1e-6 /2/ WM;
@@ -375,7 +375,7 @@ function compute_Trap_Multi() {
     document.getElementById('out_NP_1_de_Trap_multi').textContent = financial(NP_de_1,0);
 
     const NP_de_2 = 2*Math.sqrt(1e-29/de);
-    document.getElementById('out_NP_2_de_Trap_multi').textContent = financial(NP_de_2,0);
+    document.getElementById('out_NP_2_de_Trap_multi').textContent = financial(NP_de_2,1);
 
     const WM = Number(document.getElementById('WM_Trap_Multi').value)*1e33;
     const MQM = df*1e-6/2/WM;
