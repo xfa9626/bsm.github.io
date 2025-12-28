@@ -322,7 +322,7 @@ function compute_Beam() {
 }
 </script>
 
-    <script>
+   <script>
 function compute_Trap() {
 
     const tau = Number(document.getElementById('tau_Trap').value);
@@ -357,33 +357,34 @@ function compute_Trap() {
     
     <script>
 function compute_Trap_Multi() {
-    
     const tau = Number(document.getElementById('tau_Trap_Multi').value);
     const Nshot = Number(document.getElementById('Nshot_Trap_Multi').value);
     const Frep = Number(document.getElementById('Frep_Trap_Multi').value);
-    const TDAQ = Number(document.getElementById('DAQ_Trap_Multi').value) * 24 * 3600;
+    const TDAQ = Number(document.getElementById('DAQ_Trap_Multi').value) * 24*3600;
     const hbar = 1.054e-34;
     const eCharge = 1.602e-19;
 
-    const df = 1 / (2 * Math.PI * tau * Math.sqrt(Frep *Nshot * TDAQ)) * 1e6;
+    const df = 1 / (2*Math.PI*tau*Math.sqrt(Frep*Nshot*TDAQ))*1e6;
     document.getElementById('out_df_Multi').textContent = financial(df,3);
-    
-    const Eeff = Number(document.getElementById('Eeff_Trap_Multi').value) * 1e9 * 1e2;
-    const de = df*1e-6 *(2*Math.PI *hbar/2)/ Eeff / eCharge * 1e2;
+
+    const Eeff = Number(document.getElementById('Eeff_Trap_Multi').value)*1e9*1e2;
+    const de = df*1e-6*(2*Math.PI*hbar/2)/Eeff/eCharge*1e2;
     document.getElementById('out_de_Trap_Multi').textContent = de.toExponential(2);
-    
+
     const NP_de_1 = 48*Math.sqrt(1e-29/de);
-    document.getElementById('out_NP_1_de_Trap_Multi').textContent = financial(NP_de_1,0);
+    document.getElementById('out_NP_1_de_Trap_multi').textContent = financial(NP_de_1,0);
 
     const NP_de_2 = 2*Math.sqrt(1e-29/de);
-    document.getElementById('out_NP_2_de_Trap_Multi').textContent = financial(NP_de_2,0);   
-    const WM = Number(document.getElementById('WM_Trap_Multi').value)*1e33;
-    const MQM = df*1e-6 /2/ WM;
-    document.getElementById('out_M_Trap_Multi').textContent = MQM.toExponential(2);   
+    document.getElementById('out_NP_2_de_Trap_multi').textContent = financial(NP_de_2,0);
 
-    const WS = Number(document.getElementById('WS_Trap_Multi').value) * 44.8; // 44.8 is a.u. to Hz/e*fm^3
+    const WM = Number(document.getElementById('WM_Trap_Multi').value)*1e33;
+    const MQM = df*1e-6/2/WM;
+    document.getElementById('out_M_Trap_Multi').textContent = MQM.toExponential(2);
+
+    const WS = Number(document.getElementById('WS_Trap_Multi').value) * 44.8;
     const SM = df*1e-6 /2/ WS;
-    document.getElementById('out_S_Trap_Multi').textContent = SM.toExponential(2);}
+    document.getElementById('out_S_Trap_Multi').textContent = SM.toExponential(2);
+}
 </script>
 
 <script>
