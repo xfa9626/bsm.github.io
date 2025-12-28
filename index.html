@@ -298,8 +298,12 @@ $m_{q}$: quark's mass ($q=u,d$)<br>
 </div> 
 <div class="form-row">
   $~~~M/\tilde{d}_q:$ <input type="number" id="Mdq" value="1.0" step="0.1"
-         style="width:40px;" oninput="compute_BSM()">$\times10^{-10}e\cdot\rm{cm}~$  $~~~~\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$ <span id="out_NP_1_M_BSM">0</span>$~\boldsymbol{\mathrm{TeV}}$
+         style="width:40px;" oninput="compute_BSM()">$\times10^{-10}e\cdot\rm{cm}~$  $~~~~ \tilde{d}_q= $ <span id="out_dq_MQM_BSM">0</span>$~\mathrm{cm}$
 </div> 
+
+<div class="form-row">
+  <label2></label2>$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$ <span id="out_NP_1_M_BSM">0</span>$~\boldsymbol{\mathrm{TeV}}$
+</div>
 <div class="form-row">
   <label2></label2>$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$ <span id="out_NP_2_M_BSM">0</span>$~\boldsymbol{\mathrm{TeV}}$
 </div> 
@@ -312,9 +316,11 @@ $m_{q}$: quark's mass ($q=u,d$)<br>
 <!-- NSM -->
 <div class="form-row">
   $~~~S/\tilde{d}_q:$ <input type="number" id="Sdq" value="5000" step="100"
-         style="width:60px;" oninput="compute_BSM()">$e\cdot\rm{fm}^2~$  $~~~~~~~~~~~~\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$ <span id="out_NP_1_S_BSM">0</span>$~\boldsymbol{\mathrm{TeV}}$
+         style="width:60px;" oninput="compute_BSM()">$e\cdot\rm{fm}^2~$    $~~~~ \tilde{d}_q= $ <span id="out_dq_NSM_BSM">0</span>$~\mathrm{cm}$
 </div> 
 <div class="form-row">
+  <label2></label2>$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$ <span id="out_NP_1_S_BSM">0</span>$~\boldsymbol{\mathrm{TeV}}$
+</div> <div class="form-row">
   <label2></label2>$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$ <span id="out_NP_2_S_BSM">0</span>$~\boldsymbol{\mathrm{TeV}}$
 </div> 
 <script>
@@ -385,7 +391,9 @@ function compute_BSM() {
     const df = Number(document.getElementById('df_BSM').value)*uHz;
     const Eeff = Number(document.getElementById('Eeff_BSM').value)*GV/cm;
     const WM = Number(document.getElementById('WM_BSM').value)*1e33/eCharge/cm/cm;
+    const M_dq = Number(document.getElementById('Mdq').value)*1e-10*eCharge*cm;
     const WS = Number(document.getElementById('WS_BSM').value)*auToHz;
+    const S_dq = Number(document.getElementById('Sdq').value)*eCharge*fm**2;
     
     const de = df *(h/2/Eeff);
     document.getElementById('out_de_BSM').textContent = (de/eCharge/cm).toExponential(2);
@@ -396,13 +404,15 @@ function compute_BSM() {
     document.getElementById('out_NP_1_de_BSM').textContent = financial(M_NP_1_de/TeVTokg,0);
     document.getElementById('out_NP_2_de_BSM').textContent = financial(M_NP_2_de/TeVTokg,1);
     
-    const M = df *(1/2/WM)/eCharge/cm/cm;
-    document.getElementById('out_M_BSM').textContent = M.toExponential(2);
+    const M = df *(1/2./WM);
+    document.getElementById('out_M_BSM').textContent = (M/eCharge/cm/cm).toExponential(2);
+    const dq_MQM=M/M_dq;
+    document.getElementById('out_dq_MQM_BSM').textContent = (dq_MQM/cm).toExponential(2);
     
-
-    const S = df *(1/2/WS);
+    const S = df *(1/2./WS);
     document.getElementById('out_S_BSM').textContent = S.toExponential(2);
-
+    const dq_NSM=S/S_dq;
+    document.getElementById('out_dq_NSM_BSM').textContent = (dq_NSM/cm).toExponential(2);
 }
 
 </script>
