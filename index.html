@@ -60,6 +60,17 @@ h1 {
     align-items: center;
     margin-bottom: 10px;
 }
+.form-row2 {
+    display: flex;
+    align-items: right;
+    margin-bottom: 10px;
+}
+
+.form-row2 label {
+    width: 250px;
+    align-items: right;
+    font-weight: bold;
+}
 
 .form-row label {
     width: 250px;
@@ -84,14 +95,6 @@ h1 {
 .form-row title {
     width: 100px;
     font-weight: bold;
-}
-
-.form-row2 {
-    display: grid;
-    grid-template-columns: 70px 70px 1fr;
-    align-items: center;
-    margin-bottom: 6px;
-    column-gap: 6px;
 }
 
 table {
@@ -160,6 +163,15 @@ $W_S$: NSM sensitivity parameter<br>
   <input type="number" id="Eeff_Beam" value="78" step="1"
          style="width:40px;" oninput="compute_Beam()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Beam">0</span>$~e\cdot{\rm cm}$
 </div>   
+
+<div class="form-row2">
+  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
+</div> 
+
+<div class="form-row2">
+  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
+</div> 
+
 <div class="form-row">
   <label2>$W_M$:</label2>
   <input type="number" id="WM_Beam" value="1" step="1"
@@ -200,7 +212,16 @@ $W_S$: NSM sensitivity parameter<br>
   <label2>$\mathcal{E}_{\rm eff}$:</label2>
   <input type="number" id="Eeff_Trap" value="78" step="1"
          style="width:40px;" oninput="compute_Trap()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Trap">0</span>$~e\cdot{\rm cm}$
-</div>   
+</div> 
+
+<div class="form-row2">
+  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
+</div> 
+
+<div class="form-row2">
+  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
+</div> 
+
 <div class="form-row">
   <label2>$W_M$:</label2>
   <input type="number" id="WM_Trap" value="1" step="1"
@@ -244,6 +265,15 @@ $W_S$: NSM sensitivity parameter<br>
   <input type="number" id="Eeff_Trap_Multi" value="78" step="1"
          style="width:40px;" oninput="compute_Trap_Multi()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Trap_Multi">0</span>$~e\cdot{\rm cm}$
 </div>   
+
+<div class="form-row2">
+  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
+</div> 
+
+<div class="form-row2">
+  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
+</div> 
+
 <div class="form-row">
   <label2>$W_M$:</label2>
   <input type="number" id="WM_Trap_Multi" value="1" step="1"
@@ -270,12 +300,18 @@ function compute_Beam() {
     const eCharge = 1.602e-19;
 
     const df = 1 / (2 * Math.PI* tau * Math.sqrt(Ndot * TDAQ)) * 1e6;
-    document.getElementById('out_df_Beam').textContent = financial(df);
+    document.getElementById('out_df_Beam').textContent = financial(df,3);
     
     const Eeff = Number(document.getElementById('Eeff_Beam').value) * 1e9 * 1e2;
     const de = df*1e-6 *(2*Math.PI *hbar/2)/ Eeff / eCharge * 1e2;
     document.getElementById('out_de_Beam').textContent = de.toExponential(2);
      
+    const NP_de_1 = 48*Math.sqrt(1e-29/de);
+    document.getElementById('out_NP_1_de_Beam').textContent = financial(NP_de_1,0);
+
+    const NP_de_2 = 2*Math.sqrt(1e-29/de);
+    document.getElementById('out_NP_2_de_Beam').textContent = financial(NP_de_2,0);
+
     const WM = Number(document.getElementById('WM_Beam').value)*1e33;
     const MQM = df*1e-6 /2/ WM;
     document.getElementById('out_M_Beam').textContent = MQM.toExponential(2);   
@@ -296,7 +332,7 @@ function compute_Trap() {
     const eCharge = 1.602e-19;
 
     const df = 1 / (2 * Math.PI * Math.sqrt(tau *Nshot * TDAQ)) * 1e6;
-    document.getElementById('out_df_Trap').textContent = financial(df);
+    document.getElementById('out_df_Trap').textContent = financial(df,3);
     
     const Eeff = Number(document.getElementById('Eeff_Trap').value) * 1e9 * 1e2;
     const de = df*1e-6 *(2*Math.PI *hbar/2)/ Eeff / eCharge * 1e2;
@@ -324,7 +360,7 @@ function compute_Trap_Multi() {
     const eCharge = 1.602e-19;
 
     const df = 1 / (2 * Math.PI * tau * Math.sqrt(Frep *Nshot * TDAQ)) * 1e6;
-    document.getElementById('out_df_Multi').textContent = financial(df);
+    document.getElementById('out_df_Multi').textContent = financial(df,3);
     
     const Eeff = Number(document.getElementById('Eeff_Trap_Multi').value) * 1e9 * 1e2;
     const de = df*1e-6 *(2*Math.PI *hbar/2)/ Eeff / eCharge * 1e2;
@@ -346,8 +382,8 @@ window.onload = function() {
     compute_Trap_Multi();
 };
 
-function financial(x) {
-  return Number.parseFloat(x).toFixed(3);
+function financial(x,i) {
+  return Number.parseFloat(x).toFixed(i);
 }
 </script>
 
