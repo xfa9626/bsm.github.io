@@ -118,18 +118,7 @@ tr:nth-child(even) {
 <body>
 
 <h1>EDM/MQM/NSM Limit Calculator</h1>
-
-$\delta f = \frac{2}{h}\left(d_e\mathcal{E}_\textrm{eff} + MW_M + SW_S\right)$<br><br>
-
-$\delta f$: frequency resolution<br>
-$d_e$: electron electric dipole moment (EDM)<br>
-$\mathcal{E}_\textrm{eff}$: effective electric field<br>
-$M$: nuclear magnetic quadrupole moment (MQM)<br>
-$W_M$: MQM sensitivity parameter<br>
-$S$: nuclear Schiff moment (NSM)<br>
-$W_S$: NSM sensitivity parameter<br>
-<br>
-<br>
+<h2>Frequency Resolution Calculator</h2>
 
 <div class="panel-container">
 
@@ -153,35 +142,10 @@ $W_S$: NSM sensitivity parameter<br>
   <div class="form-row">
       <label><p></p> </label>
           </div>
-    <p>$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\rightarrow\delta f$ = <span id="out_df_Beam">0</span> $\mu$Hz</p>
-    <br>
-    <!-- showing EDMs -->
-    
+    <p>$\rightarrow\delta f$ = <span id="out_df_Beam">0</span> $\mu$Hz</p>
 
-<div class="form-row">
-  <label2>$\mathcal{E}_{\rm eff}$:</label2>
-  <input type="number" id="Eeff_Beam" value="78" step="1"
-         style="width:40px;" oninput="compute_Beam()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Beam">0</span>$~e\cdot{\rm cm}$
-</div>   
 
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
 
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
-
-<div class="form-row">
-  <label2>$W_M$:</label2>
-  <input type="number" id="WM_Beam" value="1.0" step="0.1"
-         style="width:40px;" oninput="compute_Beam()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$  $\rightarrow M =~$ <span id="out_M_Beam">0</span>$~e\cdot{\rm cm}^2$
-</div> 
-<div class="form-row">
-  <label2>$W_S$:</label2>
-  <input type="number" id="WS_Beam" value="30000" step="1000"
-         style="width:60px;" oninput="compute_Beam()">  a.u. $~~~~~~~~~~~~~~~~~~\rightarrow S =~$ <span id="out_S_Beam">0</span>$~e\cdot{\rm fm}^3$
-</div> 
 
     </div> 
 
@@ -205,33 +169,7 @@ $W_S$: NSM sensitivity parameter<br>
     <div class="form-row">
       <label><p></p> </label>
           </div>
-    <p>$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\rightarrow\delta f$ = <span id="out_df_Trap">0</span> $\mu$Hz</p>
-    <br>
-        <!-- showing EDMs -->
-<div class="form-row">
-  <label2>$\mathcal{E}_{\rm eff}$:</label2>
-  <input type="number" id="Eeff_Trap" value="23" step="1"
-         style="width:40px;" oninput="compute_Trap()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Trap">0</span>$~e\cdot{\rm cm}$
-</div> 
-
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Trap">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
-
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Trap">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
-
-<div class="form-row">
-  <label2>$W_M$:</label2>
-  <input type="number" id="WM_Trap" value="1.0" step="0.1"
-         style="width:40px;" oninput="compute_Trap()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$ $\rightarrow M =~$ <span id="out_M_Trap">0</span>$~e\cdot{\rm cm}^2$
-</div> 
-<div class="form-row">
-  <label2>$W_S$:</label2>
-  <input type="number" id="WS_Trap" value="30000" step="1000"
-         style="width:60px;" oninput="compute_Trap()">  a.u. $~~~~~~~~~~~~~~~~~~\rightarrow S =~$ <span id="out_S_Trap">0</span>$~e\cdot{\rm fm}^3$
-</div> 
+    <p>$\rightarrow\delta f$ = <span id="out_df_Trap">0</span> $\mu$Hz</p>
     
     </div> 
 
@@ -257,38 +195,56 @@ $W_S$: NSM sensitivity parameter<br>
       <input type="number" value="1" id="DAQ_Trap_Multi" oninput="compute_Trap_Multi()" style="width:80px;"> day
     </div>
     
-    <p>$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\rightarrow\delta f$ = <span id="out_df_Multi">0</span> $\mu$Hz</p>
-    <br>
-            <!-- showing EDMs -->
-<div class="form-row">
-  <label2>$\mathcal{E}_{\rm eff}$:</label2>
-  <input type="number" id="Eeff_Trap_Multi" value="35" step="1"
-         style="width:40px;" oninput="compute_Trap_Multi()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Trap_Multi">0</span>$~e\cdot{\rm cm}$
-</div>   
+    <p>$\rightarrow\delta f$ = <span id="out_df_Multi">0</span> $\mu$Hz</p>
 
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Trap_multi">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
-
-<div class="form-row2">
-  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Trap_multi">0</span>$~\boldsymbol{\mathrm{TeV}}$
-</div> 
-
-<div class="form-row">
-  <label2>$W_M$:</label2>
-  <input type="number" id="WM_Trap_Multi" value="1.0" step="0.1"
-         style="width:40px;" oninput="compute_Trap_Multi()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$ $\rightarrow M =~$ <span id="out_M_Trap_Multi">0</span>$~e\cdot{\rm cm}^2$
-</div> 
-<div class="form-row">
-  <label2>$W_S$:</label2>
-  <input type="number" id="WS_Trap_Multi" value="30000" step="1000"
-         style="width:60px;" oninput="compute_Trap_Multi()">  a.u. $~~~~~~~~~~~~~~~~~~\rightarrow S =~$ <span id="out_S_Trap_Multi">0</span>$~e\cdot{\rm fm}^3$
-</div> 
     
   </div>
   </div>
 </div>
 
+<h2>BSM Limit Calculator</h2>
+$\delta f = \frac{2}{h}\left(d_e\mathcal{E}_\textrm{eff} + MW_M + SW_S\right)$<br><br>
+
+$\delta f$: frequency resolution<br>
+$d_e$: electron electric dipole moment (EDM)<br>
+$\mathcal{E}_\textrm{eff}$: effective electric field<br>
+$M$: nuclear magnetic quadrupole moment (MQM)<br>
+$W_M$: MQM sensitivity parameter<br>
+$S$: nuclear Schiff moment (NSM)<br>
+$W_S$: NSM sensitivity parameter<br>
+<br>
+<br>
+
+    <!-- showing EDMs -->
+<div class="form-row">
+  <p>frequency resolution $\delta f:~$</p>
+  <input type="number" id="df_BSM" value="10.0" step="0.1"
+         style="width:60px;" oninput="compute_Beam()">  $\mu$Hz 
+</div>   
+<div class="form-row">
+  <label2>$\mathcal{E}_{\rm eff}$:</label2>
+  <input type="number" id="Eeff_Beam" value="78" step="1"
+         style="width:40px;" oninput="compute_Beam()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Beam">0</span>$~e\cdot{\rm cm}$
+</div>   
+
+<div class="form-row2">
+  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$<span id="out_NP_1_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
+</div> 
+
+<div class="form-row2">
+  <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_Beam">0</span>$~\boldsymbol{\mathrm{TeV}}$
+</div> 
+
+<div class="form-row">
+  <label2>$W_M$:</label2>
+  <input type="number" id="WM_Beam" value="1.0" step="0.1"
+         style="width:40px;" oninput="compute_Beam()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$  $\rightarrow M =~$ <span id="out_M_Beam">0</span>$~e\cdot{\rm cm}^2$
+</div> 
+<div class="form-row">
+  <label2>$W_S$:</label2>
+  <input type="number" id="WS_Beam" value="30000" step="1000"
+         style="width:60px;" oninput="compute_Beam()">  a.u. $~~~~~~~~~~~~~~~~~~\rightarrow S =~$ <span id="out_S_Beam">0</span>$~e\cdot{\rm fm}^3$
+</div> 
 
 <script>
 function compute_Beam() {
