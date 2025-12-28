@@ -275,10 +275,11 @@ $m_{q}$: quark's mass ($q=u,d$)<br>
   <input type="number" id="df_BSM" value="10.0" step="0.1"
          style="width:60px;" oninput="compute_BSM()">  $\mu$Hz 
 </div>   
+    <!-- EDM -->
 <div class="form-row">
   <label2>$\mathcal{E}_{\rm eff}$:</label2>
-  <input type="number" id="Eeff_Beam" value="78" step="1"
-         style="width:40px;" oninput="compute_BSM()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_Beam">0</span>$~e\cdot{\rm cm}$
+  <input type="number" id="Eeff_BSM" value="78" step="1"
+         style="width:40px;" oninput="compute_BSM()">  GV/cm $~~~~~~~~~~~~~~~~~\rightarrow d_e =~$ <span id="out_de_BSM">0</span>$~e\cdot{\rm cm}$
 </div>   
 
 <div class="form-row2">
@@ -289,9 +290,10 @@ $m_{q}$: quark's mass ($q=u,d$)<br>
   <label></label>$\boldsymbol{M_\textrm{NP} \textrm{(2-loop)} = }$<span id="out_NP_2_de_BSM">0</span>$~\boldsymbol{\mathrm{TeV}}$
 </div> 
 
+<!-- MQM -->
 <div class="form-row">
   <label2>$W_M$:</label2>
-  <input type="number" id="WM_Beam" value="1.0" step="0.1"
+  <input type="number" id="WM_BSM" value="1.0" step="0.1"
          style="width:40px;" oninput="compute_BSM()">  $\times10^{33}~$ Hz/$e\cdot\rm{cm}^2~$  $\rightarrow M =~$ <span id="out_M_BSM">0</span>$~e\cdot{\rm cm}^2$
 </div> 
 <div class="form-row">
@@ -303,9 +305,11 @@ $m_{q}$: quark's mass ($q=u,d$)<br>
 </div> 
 <div class="form-row">
   <label2>$W_S$:</label2>
-  <input type="number" id="WS_Beam" value="30000" step="1000"
+  <input type="number" id="WS_BSM" value="30000" step="1000"
          style="width:60px;" oninput="compute_BSM()">  a.u. $~~~~~~~~~~~~~~~~~~\rightarrow S =~$ <span id="out_S_BSM">0</span>$~e\cdot{\rm fm}^3$
-</div> 
+</div>
+
+<!-- NSM -->
 <div class="form-row">
   $~~~S/\tilde{d}_q:$ <input type="number" id="Sdq" value="5000" step="100"
          style="width:60px;" oninput="compute_BSM()">$e\cdot\rm{fm}^2~$  $~~~~~~~~~~~~\boldsymbol{M_\textrm{NP} \textrm{(1-loop)} = }$ <span id="out_NP_1_S_BSM">0</span>$~\boldsymbol{\mathrm{TeV}}$
@@ -324,28 +328,8 @@ function compute_Beam() {
 
     const df = 1 / (2 * Math.PI* tau * Math.sqrt(Ndot * TDAQ)) * 1e6;
     document.getElementById('out_df_Beam').textContent = financial(df,3);
-    
-    const Eeff = Number(document.getElementById('Eeff_Beam').value) * 1e9 * 1e2;
-    const de = df*1e-6 *(2*Math.PI *hbar/2)/ Eeff / eCharge * 1e2;
-    document.getElementById('out_de_Beam').textContent = de.toExponential(2);
-     
-    const NP_de_1 = 48*Math.sqrt(1e-29/de);
-    document.getElementById('out_NP_1_de_Beam').textContent = financial(NP_de_1,0);
-
-    const NP_de_2 = 2*Math.sqrt(1e-29/de);
-    document.getElementById('out_NP_2_de_Beam').textContent = financial(NP_de_2,1);
-
-    const WM = Number(document.getElementById('WM_Beam').value)*1e33;
-    const MQM = df*1e-6 /2/ WM;
-    document.getElementById('out_M_Beam').textContent = MQM.toExponential(2);   
-
-    const WS = Number(document.getElementById('WS_Beam').value) * 44.8; // 44.8 is a.u. to Hz/e*fm^3
-    const SM = df*1e-6 /2/ WS;
-    document.getElementById('out_S_Beam').textContent = SM.toExponential(2);
 }
-</script>
 
-   <script>
 function compute_Trap() {
 
     const tau = Number(document.getElementById('tau_Trap').value);
@@ -356,29 +340,8 @@ function compute_Trap() {
 
     const df = 1 / (2 * Math.PI * Math.sqrt(tau *Nshot * TDAQ)) * 1e6;
     document.getElementById('out_df_Trap').textContent = financial(df,3);
-    
-    const Eeff = Number(document.getElementById('Eeff_Trap').value) * 1e9 * 1e2;
-    const de = df*1e-6 *(2*Math.PI *hbar/2)/ Eeff / eCharge * 1e2;
-    document.getElementById('out_de_Trap').textContent = de.toExponential(2);
-      
-    const NP_de_1 = 48*Math.sqrt(1e-29/de);
-    document.getElementById('out_NP_1_de_Trap').textContent = financial(NP_de_1,0);
-
-    const NP_de_2 = 2*Math.sqrt(1e-29/de);
-    document.getElementById('out_NP_2_de_Trap').textContent = financial(NP_de_2,1);
-    
-    const WM = Number(document.getElementById('WM_Trap').value)*1e33;
-    const MQM = df*1e-6 /2/ WM;
-    document.getElementById('out_M_Trap').textContent = MQM.toExponential(2);   
-
-    const WS = Number(document.getElementById('WS_Trap').value) * 44.8; // 44.8 is a.u. to Hz/e*fm^3
-    const SM = df*1e-6 /2/ WS;
-    document.getElementById('out_S_Trap').textContent = SM.toExponential(2);
 }
-</script>
 
-    
-    <script>
 function compute_Trap_Multi() {
     const tau = Number(document.getElementById('tau_Trap_Multi').value);
     const Nshot = Number(document.getElementById('Nshot_Trap_Multi').value);
@@ -391,6 +354,46 @@ function compute_Trap_Multi() {
     document.getElementById('out_df_Multi').textContent = financial(df,3);
 
 }
+
+function compute_Trap_Multi() {
+    const tau = Number(document.getElementById('tau_Trap_Multi').value);
+    const Nshot = Number(document.getElementById('Nshot_Trap_Multi').value);
+    const Frep = Number(document.getElementById('Frep_Trap_Multi').value);
+    const TDAQ = Number(document.getElementById('DAQ_Trap_Multi').value) * 24*3600;
+    const hbar = 1.054e-34;
+    const eCharge = 1.602e-19;
+
+    const df = 1 / (2*Math.PI*tau*Math.sqrt(Frep*Nshot*TDAQ))*1e6;
+    document.getElementById('out_df_Multi').textContent = financial(df,3);
+
+}
+
+function compute_BSM() {
+    const hbar = 1.054e-34;
+    const h = 2*Math.PI*hbar;
+    const eCharge = 1.602e-19;
+    const cm = 1e-2;
+    const fm = 1e-15;
+    const GV = 1e9;
+    const uHz = 1e-6;
+    const auToHz = 44.;
+
+    const df = Number(document.getElementById('df_BSM').value)*uHz;
+    const Eeff = Number(document.getElementById('Eeff_BSM').value)*GV/cm;
+    const WM = Number(document.getElementById('WM_BSM').value)*1e33/eCharge/cm/cm;
+    const WS = Number(document.getElementById('WS_BSM').value)*auToHz;
+    
+    const de = df *(h/2/Eeff)/eCharge/cm;
+    document.getElementById('out_de_BSM').textContent = de.toExponential(2);
+
+    const M = df *(1/2/WM)/eCharge/cm/cm;
+    document.getElementById('out_M_BSM').textContent = M.toExponential(2);
+
+    const S = df *(1/2/WS);
+    document.getElementById('out_S_BSM').textContent = S.toExponential(2);
+
+}
+
 </script>
 
 <script>
