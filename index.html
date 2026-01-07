@@ -141,8 +141,8 @@ tr:nth-child(even) {
   <div class="panel">
         <div class="caption">beam type </div>
         <div class="example">(e.g. ACME EDM) </div>
-    <img src="df_Beam.png" width="250">
-
+<!--    <img src="df_Beam.png" width="250">-->
+$$\delta f=\frac{1}{2\pi\tau\sqrt{\dot{N}T_\mathrm{DAQ}}}$$
     <div class="form-row">
       <label>Spin precession time:</label>
       <input type="number" value="0.005" id="tau_Beam" step="0.001" oninput="compute_Beam()" style="width:80px;"> s
@@ -170,7 +170,8 @@ tr:nth-child(even) {
   <div class="panel">
     <div class="caption">trap type</div>
     <div class="example">(e.g. JILA EDM III, ODT)</div>
-    <img src="df_Trap_Multiplexed.png" width="250">
+    <!--<img src="df_Trap_Multiplexed.png" width="250">-->
+    $$\delta f=\frac{1}{2\pi\tau\sqrt{f_\mathrm{rep}N_\mathrm{shot}T_\mathrm{DAQ}}}$$
     <div class="form-row">
       <label>Spin precession time:</label>
       <input type="number" value="20.0" id="tau_Trap_Multi"  step="0.1"  oninput="compute_Trap_Multi()" style="width:80px;"> s
@@ -198,7 +199,8 @@ tr:nth-child(even) {
   <div class="panel">
     <div class="caption">trap type ($\small{f_\mathrm{rep}=1/\tau}$) </div>
     <div class="example">(e.g. JILA EDM I&II)</div>
-    <img src="df_Trap.png" width="250">
+  <!--  <img src="df_Trap.png" width="250"> -->
+      $$\delta f=\frac{1}{2\pi\sqrt{\tau N_\mathrm{shot}T_\mathrm{DAQ}}}$$
     <div class="form-row">
       <label>Spin precession time:</label>
       <input type="number" value="2.0" id="tau_Trap"  step="0.1" oninput="compute_Trap()" style="width:80px;"> s
@@ -575,7 +577,7 @@ $m_{q}$: quark's mass (we use down quark)<br>
     <td><sup>199</sup>Hg</td>
     <td> - </td>
     <td>1/2</td>
-    <td> 3 <a href="http://dx.doi.org/10.1103/PhysRevLett.116.161601">[GCL2016]</a><br>(effective at 10 kV/cm)</td> 
+    <td> 2 <a href="http://dx.doi.org/10.1103/PhysRevLett.116.161601">[GCL2016]</a><br>(effective at 10 kV/cm)</td> 
     <td> 10 <a href="http://dx.doi.org/10.1103/PhysRevC.82.015501">[BDE2010]</a></td>   
     <td>&infin;</td>
     <td>-</td>
@@ -586,7 +588,7 @@ $m_{q}$: quark's mass (we use down quark)<br>
     <td><sup>153</sup>Eu:YSO</td>
     <td> - </td>
     <td>5/2</td>
-    <td> 50 <a href="https://doi.org/10.1103/PhysRevA.108.012819">[RV2023]</a></td> 
+    <td> 33 <a href="https://doi.org/10.1103/PhysRevA.108.012819">[RV2023]</a></td> 
     <td> 240 <a href="https://doi.org/10.1103/PhysRevC.110.015501">[S2024]</a>, 19,000 <a href="https://doi.org/10.1103/PhysRevA.101.042504">[FD2020]</a></td>   
     <td>&infin;</td>
     <td>-</td>
@@ -626,6 +628,17 @@ $m_{q}$: quark's mass (we use down quark)<br>
     <td>~600</td>
   </tr> 
  
+  <tr>
+    <td><sup>225</sup>Ra</td>
+    <td> - </td>
+    <td>1/2</td>
+    <td> 50 <a href="https://doi.org/10.1103/PhysRevLett.114.233002">[PDK2015]</a><br>(effective at 75 kV/cm)</td> 
+    <td> 5,000 <a href="https://doi.org/10.1103/PhysRevA.101.042504">[FD2020]</a></td>   
+    <td>&infin;</td>
+    <td>-</td>
+    <td>-</td>
+  </tr> 
+  
   <tr>
     <td><sup>225</sup>RaOH</td>
     <td><sup>2</sup>&Sigma;<sup>+</sup>(010), N=0</td>
